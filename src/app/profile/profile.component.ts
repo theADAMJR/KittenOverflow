@@ -1,15 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { ProfileService } from '../profile.service';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
+  providers: [ProfileService] // used for activated routes in service
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit
+{
 
-  constructor() { }
+  user: any;
 
-  ngOnInit(): void {
+  constructor(private service: ProfileService) {}
+
+  async ngOnInit() {
+    this.user = await this.service.get();
   }
 
 }

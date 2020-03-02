@@ -1,0 +1,10 @@
+<ul class="list-group">
+    <li *ngFor="let post of posts"
+        class="media list-group-item">
+        <div class="media-body d-inline-block">
+            <h5>{{ post.title }}</h5>
+            {{ post.body | summary }}
+        </div>
+        <div class="float-right pt-4">{{ post.createdAt | cleanDate }}</div>
+    </li>
+</ul>

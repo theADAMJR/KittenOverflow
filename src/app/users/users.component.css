@@ -1,0 +1,10 @@
+img
+{ 
+    max-width: 64px;
+    border-radius: 5px;
+}
+
+.media-body
+{
+    padding: 5px 10px;
+}

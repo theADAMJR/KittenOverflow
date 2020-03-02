@@ -1,1 +1,16 @@
-<p>users works!</p>
+<section class="container">
+    <h2 class="display-3">Users</h2>
+
+    <div *ngFor="let user of users" 
+        class="col-lg-3 col-md-4 col-sm-6 float-left">
+        <div class="media">
+            <a class="d-flex align-self-bottom" href="#">
+                <img src="//cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814049_960_720.png">
+            </a>
+            <div class="media-body">
+                <h5><a [routerLink]="['/users/' + user.id]">{{ user.username }}</a></h5>
+                <p>{{ user.tags }}</p>
+            </div>
+        </div>
+    </div>
+</section>

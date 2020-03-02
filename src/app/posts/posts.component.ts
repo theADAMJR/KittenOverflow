@@ -2,27 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { PostsService } from '../services/posts.service';
 
 @Component({
-  selector: 'app-posts',
+  selector: 'posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css']
 })
-export class PostsComponent implements OnInit
+export class PostsComponent
 {
-  posts = [];
-
-  constructor(private service: PostsService) {}
-
-  ngOnInit()
-  {
-
-  }
-
-}
-
-export interface Post
-{
-  id: string,
-  title: string,
-  body: string,
-  authorId: string
 }

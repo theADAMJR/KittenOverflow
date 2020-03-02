@@ -1,0 +1,6 @@
+.card-title
+{
+    background: var(--background-primary);
+    padding: 5px;
+    padding-left: 10px;
+}

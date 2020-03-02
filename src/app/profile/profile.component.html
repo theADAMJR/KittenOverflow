@@ -1,1 +1,11 @@
-<p>profile works!</p>
+<section class="container">
+    <div class="jumbotron">
+        <h1 class="display-3">{{ user.username }}</h1>
+        <p class="lead">{{ user.bio }}</p>
+        <hr class="my-2">
+        <p>{{ user.tags }}</p>
+        <p class="lead">
+            <a class="btn btn-primary" routerLink="follow" role="button">Follow</a>
+        </p>
+    </div>
+</section>

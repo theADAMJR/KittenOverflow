@@ -10,6 +10,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { TagsComponent } from './tags/tags.component';
 import { UsersComponent } from './users/users.component';
 import { ProfileComponent } from './profile/profile.component';
+import { SummaryPipe } from './summary.pipe';
+import { CleanDatePipe } from './clean-date.pipe';
+import { RecentPostsComponent } from './recent-posts/recent-posts.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { ProfileComponent } from './profile/profile.component';
     NavbarComponent,
     TagsComponent,
     UsersComponent,
-    ProfileComponent
+    ProfileComponent,
+    SummaryPipe,
+    CleanDatePipe,
+    RecentPostsComponent
   ],
   imports: [
     BrowserModule,
