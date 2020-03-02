@@ -15,13 +15,13 @@ export class UserAuthService
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  signUp(user: User)
+  signUp(user: Credentials)
   {
-    const url = `${this.endpoint}/register`;
+    const url = `${this.endpoint}/sign-up`;
     return this.http.post(url, user);
   }
 
-  login(user: User)
+  login(user: Credentials)
   {
     const url = `${this.endpoint}/login`;
     return this.http.post(url, user)
@@ -59,4 +59,10 @@ export interface User
   bio: string,
   tags: string[],
   createdAt: Date
+}
+
+export interface Credentials
+{
+  username: string,
+  password: string
 }

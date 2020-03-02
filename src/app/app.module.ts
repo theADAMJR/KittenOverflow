@@ -13,6 +13,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { SummaryPipe } from './summary.pipe';
 import { CleanDatePipe } from './clean-date.pipe';
 import { RecentPostsComponent } from './recent-posts/recent-posts.component';
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { RecentPostsComponent } from './recent-posts/recent-posts.component';
     ProfileComponent,
     SummaryPipe,
     CleanDatePipe,
-    RecentPostsComponent
+    RecentPostsComponent,
+    LoginComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,

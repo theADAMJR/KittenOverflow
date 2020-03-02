@@ -8,12 +8,12 @@ import { UserAuthService, User } from '../services/user-auth.service';
 })
 export class NavbarComponent implements OnInit
 {
-  user: User;
+  get user() { return this.auth.user }
 
   constructor(public auth: UserAuthService) {}
 
   ngOnInit()
   {
-    this.user = this.auth.user;
+    
   }
 }
