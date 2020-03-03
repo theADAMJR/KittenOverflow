@@ -15,6 +15,8 @@ import { CleanDatePipe } from './clean-date.pipe';
 import { RecentPostsComponent } from './recent-posts/recent-posts.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -29,12 +31,14 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     CleanDatePipe,
     RecentPostsComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

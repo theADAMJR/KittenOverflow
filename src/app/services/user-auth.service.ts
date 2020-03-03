@@ -7,48 +7,38 @@ import { Router } from '@angular/router';
 })
 export class UserAuthService
 {
-  endpoint: string = 'http://localhost:3000/';
+  endpoint = "http://localhost:3000";
   user: User;
-  
-  get token() { return localStorage.getItem("token") }
-  get loggedIn() { return Boolean(this.token) }
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  signUp(user: Credentials)
+  async signUp(user: Credentials)
   {
     const url = `${this.endpoint}/sign-up`;
-    return this.http.post(url, user);
+    return await this.http.post(url, user).toPromise();
   }
 
-  login(user: Credentials)
+  async login(user: Credentials)
   {
+    console.log(user);
+    
     const url = `${this.endpoint}/login`;
-    return this.http.post(url, user)
-      .subscribe((res: any) =>
-      {
-        localStorage.setItem("token", res.token);
-        this.getUser(res._id)
-          .subscribe((res: User) =>
-          {
-            this.user = res;
-            this.router.navigate(["user/" + res._id])
-          });
-      });
+    const res: any = await this.http.post(url, user).toPromise();
+      
+    this.user = await this.getUser(res._id);
+    this.router.navigate(["/user/" + this.user._id]);
   }
 
   logout()
   {
-    const removeToken: any = localStorage.removeItem("token");
-    if (!removeToken)
-      this.router.navigate(["login"]);
     this.user = null;
+    this.router.navigate(["/"])
   }
 
-  getUser(id)
+  private async getUser(id)
   {
     const url = `${this.endpoint}/users/${id}`;
-    return this.http.get(url);
+    return await this.http.get(url).toPromise() as User;
   }
 }
 
@@ -56,6 +46,7 @@ export interface User
 {
   _id: string,
   username: string,
+  avatarURL: string,
   bio: string,
   tags: string[],
   createdAt: Date

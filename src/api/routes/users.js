@@ -9,10 +9,14 @@ router.get("/", async(req, res) =>
     res.json(users);
 });
 
-router.get("/:id(/^[0-9a-fA-F]{24}$/)", async(req, res) =>
+router.get("/:id", async(req, res) =>
 {
-    const user = await User.findOne({ _id: req.params.id });
-    res.json(user);
+    try
+    {
+        const user = await User.findOne({ _id: req.params.id });
+        res.json(user);        
+    }
+    catch (err) { res.status(400).send(err) }
 });
 
 module.exports = router;

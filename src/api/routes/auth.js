@@ -16,14 +16,22 @@ const setup = (username) => (
 router.post("/sign-up", async(req, res) => 
 {
     const newUser = new User(setup(req.body.username));
+    
     try { await User.register(newUser, req.body.password) }
     catch (err) { return res.status(400).send(err) }
-    passport.authenticate("local")(req, res, () => res.send(200));
+
+    res.status(200).send("OK");
 });
 
-router.post("/login", passport.authenticate("local", { failWithError: true }), (req, res) => 
+function log(req,res,next) 
 {
-    res.send(200);
+    console.log(req.body);
+    next();
+}
+
+router.post("/login", log, passport.authenticate("local", { failWithError: false }), (req, res) => 
+{
+    res.json({ success: true });
 });
 
 module.exports = router;

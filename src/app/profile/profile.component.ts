@@ -9,13 +9,17 @@ import { ProfileService } from '../profile.service';
 })
 export class ProfileComponent implements OnInit
 {
-
   user: any;
 
   constructor(private service: ProfileService) {}
 
-  async ngOnInit() {
+  async ngOnInit()
+  {
     this.user = await this.service.get();
   }
 
+  follow()
+  {
+    alert("Test");
+  }
 }
