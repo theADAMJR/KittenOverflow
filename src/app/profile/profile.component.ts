@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../profile.service';
+import { UserAuthService, User } from '../services/user-auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'profile',
@@ -9,17 +11,14 @@ import { ProfileService } from '../profile.service';
 })
 export class ProfileComponent implements OnInit
 {
-  user: any;
+  user: User = {} as User;
 
-  constructor(private service: ProfileService) {}
-
-  async ngOnInit()
-  {
-    this.user = await this.service.get();
-  }
-
-  follow()
-  {
-    alert("Test");
+  constructor(private route: ActivatedRoute, private router: Router, private auth: UserAuthService) {}
+  
+  async ngOnInit() {
+    const id = this.route.snapshot.paramMap.get("id");
+    this.user = await this.auth.getUser(id);
+    if (!this.user)
+      this.router.navigate(["/404"]);
   }
 }

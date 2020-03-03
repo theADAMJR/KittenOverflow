@@ -1,4 +1,5 @@
 const bodyParser = require("body-parser"),
+      cors = require("cors"),
       express = require("express"),
       LocalStrategy = require("passport-local"),
       mongoose = require("mongoose"),
@@ -17,14 +18,9 @@ passport.deserializeUser(User.deserializeUser());
 
 const app = express();
 
+app.use(cors());
 app.use(passport.initialize());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use((req, res, next) =>
-{  
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header("Access-Control-Allow-Headers", "*")
-  next();
-});
+app.use(bodyParser.json());
 
 app.use("/", authRoutes);
 app.use("/posts", postsRoutes);

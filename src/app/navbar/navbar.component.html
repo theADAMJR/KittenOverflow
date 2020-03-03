@@ -16,11 +16,20 @@
     <ul class="navbar-nav ml-auto">
         <li *ngIf="!user"
             class="nav-item">
+            <a class="nav-link" routerLink="/sign-up">Sign Up</a>
+        </li>
+        <li *ngIf="!user"
+            class="nav-item">
             <a class="nav-link" routerLink="/login">Login</a>
         </li>
         <li *ngIf="user" 
             class="nav-item">
-            <a class="nav-link" routerLink="/logout">Logout</a>
+            <a (click)="auth.logout()"
+                class="nav-link" routerLink="">Logout</a>
+        </li>
+        <li *ngIf="user" 
+            class="nav-item">
+            <a class="nav-link" [routerLink]="['/users/' + user._id]">{{ user.username }}</a>
         </li>
     </ul>
 </nav>

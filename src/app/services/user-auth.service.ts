@@ -1,5 +1,6 @@
+import { JwtHelperService,  } from "@auth0/angular-jwt";
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -8,37 +9,35 @@ import { Router } from '@angular/router';
 export class UserAuthService
 {
   endpoint = "http://localhost:3000";
-  user: User;
+
+  get loggedIn() { return new JwtHelperService().isTokenExpired(this.token) }
+
+  get user() { return (this.token) ? new JwtHelperService().decodeToken(this.token) : null }
+
+  private get token() { return localStorage.getItem("token") }
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  async signUp(user: Credentials)
-  {
-    const url = `${this.endpoint}/sign-up`;
-    return await this.http.post(url, user).toPromise();
-  }
-
-  async login(user: Credentials)
-  {
-    console.log(user);
+  async signUp(user: Credentials) {
+    const res: any = await this.http.post(`${this.endpoint}/sign-up`, user).toPromise();
     
-    const url = `${this.endpoint}/login`;
-    const res: any = await this.http.post(url, user).toPromise();
-      
-    this.user = await this.getUser(res._id);
-    this.router.navigate(["/user/" + this.user._id]);
+    if (res)
+      localStorage.setItem("token", res);
+    return Boolean(res);
   }
 
-  logout()
-  {
-    this.user = null;
-    this.router.navigate(["/"])
+  async login(user: Credentials) {
+    const res: any = await this.http.post(`${this.endpoint}/login`, user).toPromise();
+
+    if (res)
+      localStorage.setItem("token", res);
+    return Boolean(res);
   }
 
-  private async getUser(id)
-  {
-    const url = `${this.endpoint}/users/${id}`;
-    return await this.http.get(url).toPromise() as User;
+  logout() { localStorage.removeItem("token") }
+  
+  async getUser(id: string) {
+    return await this.http.get(`${this.endpoint}/users/${id}`).toPromise() as Promise<User>;
   }
 }
 

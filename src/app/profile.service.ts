@@ -1,19 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from './services/data.service';
 import { ActivatedRoute } from '@angular/router';
+import { UserAuthService, User } from './services/user-auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProfileService extends DataService
+export class ProfileService implements OnInit
 {
-  constructor(route: ActivatedRoute, http: HttpClient)
-  {
-    const id = route.snapshot.paramMap.get("id");
-    console.log(id);
-        
-    super("http://localhost:3000/users/" + id, http);
+  user: User;
+
+  constructor(private route: ActivatedRoute, private auth: UserAuthService) {}
+  
+  async ngOnInit() {
+    const id = this.route.snapshot.paramMap.get("id");
+    this.user = await this.auth.getUser(id);
   }
 
   follow()

@@ -1,4 +1,5 @@
 const express = require("express"),
+      jwt = require('jsonwebtoken'),
 	  passport = require("passport"),
 	  User = require("../models/user");
 
@@ -20,18 +21,18 @@ router.post("/sign-up", async(req, res) =>
     try { await User.register(newUser, req.body.password) }
     catch (err) { return res.status(400).send(err) }
 
-    res.status(200).send("OK");
+    const token = jwt.sign({ username: newUser.username }, 'secret' , { expiresIn : '3h' });
+    return res.status(201).json(token);
 });
 
-function log(req,res,next) 
+router.post("/login", passport.authenticate("local", { failWithError: false }), async(req, res) => 
 {
-    console.log(req.body);
-    next();
-}
+    const user = await User.findOne({ username: req.body.username }); 
+    if (!user)
+        return res.status(400).json({ message:' Invalid Credentials' });
 
-router.post("/login", log, passport.authenticate("local", { failWithError: false }), (req, res) => 
-{
-    res.json({ success: true });
+    const token = jwt.sign({ username: req.body.username }, 'secret' , { expiresIn : '3h' });
+    return res.status(200).json(token);
 });
 
 module.exports = router;
