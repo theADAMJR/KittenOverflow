@@ -31,10 +31,10 @@ app.use("/api/users", usersRoutes);
 app.get("/api", (req, res) => res.json({ hello: "world" }));
 app.all("/api/*", (req, res) => res.status(404).send("Not Found"));
 
-app.use(express.static(path.resolve("../dist/KittenBlogs")));
+app.use(express.static(path.resolve("../dist")));
 
 app.all("*", (req, res) =>
-    res.status(200).sendFile(path.resolve("../dist/KittenBlogs/index.html")));
+    res.status(200).sendFile(path.resolve("../dist/index.html")));
 
 app.listen(process.env.PORT || 8080, console.log("API server is live!"));
 
