@@ -6,22 +6,19 @@ import { PostsService } from '../services/posts.service';
   templateUrl: './recent-posts.component.html',
   styleUrls: ['./recent-posts.component.css']
 })
-export class RecentPostsComponent implements OnInit
-{
+export class RecentPostsComponent implements OnInit {
   posts = [];
 
   constructor(private service: PostsService) {}
 
-  async ngOnInit()
-  {
+  async ngOnInit() {
     this.posts = await this.service.get();
   }
 }
 
-export interface Post
-{
-  id: string,
-  title: string,
-  body: string,
-  authorId: string
+export interface Post {
+  id: string;
+  title: string;
+  body: string;
+  authorId: string;
 }

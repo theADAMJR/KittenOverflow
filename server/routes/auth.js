@@ -18,11 +18,12 @@ router.post("/sign-up", async(req, res) =>
 {
     const newUser = new User(setup(req.body.username));
     
-    try { await User.register(newUser, req.body.password) }
+    try {
+        await User.register(newUser, req.body.password);
+        const token = jwt.sign({ _id: newUser._id }, 'secret' , { expiresIn : '3h' });
+        return res.status(201).json(token);
+    }
     catch (err) { return res.status(400).send(err) }
-
-    const token = jwt.sign({ username: newUser.username }, 'secret' , { expiresIn : '3h' });
-    return res.status(201).json(token);
 });
 
 router.post("/login", passport.authenticate("local", { failWithError: false }), async(req, res) => 
@@ -31,7 +32,7 @@ router.post("/login", passport.authenticate("local", { failWithError: false }), 
     if (!user)
         return res.status(400).json({ message:' Invalid Credentials' });
 
-    const token = jwt.sign({ username: req.body.username }, 'secret' , { expiresIn : '3h' });
+    const token = jwt.sign({ _id: user._id }, 'secret' , { expiresIn : '3h' });
     return res.status(200).json(token);
 });
 
