@@ -25,17 +25,13 @@
     "@auth0/angular-jwt": "^4.0.0",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
-    "cors": "^2.8.5",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "jwt-helper": "^0.1.0",
     "mongoose": "^5.9.2",
-    "node": "^13.9.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
     "rxjs": "~6.5.4",
-    "test": "^0.6.0",
     "tslib": "^1.10.0",
     "typescript": "~3.7.5",
     "zone.js": "~0.10.2"
@@ -55,7 +51,6 @@
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
     "protractor": "~5.4.3",
-    "ts-node": "~8.3.0",
     "tslint": "~5.18.0"
   },
   "engines": {
