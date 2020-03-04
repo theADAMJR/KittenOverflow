@@ -36,6 +36,6 @@ app.use(express.static(path.resolve("../dist/KittenBlogs")));
 app.all("*", (req, res) =>
     res.status(200).sendFile(path.resolve("../dist/KittenBlogs/index.html")));
 
-app.listen(process.env.PORT || 3000, console.log("API server is live!"));
+app.listen(process.env.PORT || 8080, console.log("API server is live!"));
 
 module.exports = app;
