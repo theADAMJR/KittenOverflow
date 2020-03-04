@@ -2,13 +2,14 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAuthService {
   user: User;
-  endpoint = 'http://localhost:3000/api';
+  endpoint = `http://localhost:${environment.port}/api`;
 
   get loggedIn() { return new JwtHelperService().isTokenExpired(this.token); }
   private get token() { return localStorage.getItem('token'); }
@@ -47,7 +48,9 @@ export class UserAuthService {
 
   private async getCurrentUser() {
     const id = (this.token) ? new JwtHelperService().decodeToken(this.token)._id : null;
-    return this.getUser(id);
+    try {
+      return await this.getUser(id);
+    } catch { return null; }
   }
 }
 
