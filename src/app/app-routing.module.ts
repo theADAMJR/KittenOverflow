@@ -8,6 +8,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'posts', component: PostsComponent },
   { path: 'tags', component: TagsComponent },
   { path: 'users/:id', component: ProfileComponent },
+  { path: 'users/:id/edit', component: EditProfileComponent },
   { path: 'users', component: UsersComponent },
   { path: 'login', component: LoginComponent },
   { path: 'sign-up', component: SignUpComponent },

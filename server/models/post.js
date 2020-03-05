@@ -1,12 +1,10 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-const ObjectId = mongoose.Schema.Types.ObjectId;
-
-const postModel = mongoose.model("Campground",
+const postModel = mongoose.model('Post',
 {
     title: String,
     body: String,
-	authorId: String,
+	authorId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 	createdAt: Date
 });
 

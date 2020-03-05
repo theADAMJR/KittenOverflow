@@ -12,7 +12,7 @@ export class UserAuthService {
   endpoint = `http://localhost:${environment.port}/api`;
 
   get loggedIn() { return new JwtHelperService().isTokenExpired(this.token); }
-  private get token() { return localStorage.getItem('token'); }
+  get token() { return localStorage.getItem('token'); }
 
   constructor(private http: HttpClient, private router: Router) {
     this.getCurrentUser().then(user => this.user = user); }
@@ -22,7 +22,7 @@ export class UserAuthService {
 
     if (res) {
       localStorage.setItem('token', res);
-      this.user =  await this.getCurrentUser();
+      await this.updateUser();
     }
     return Boolean(res);
   }
@@ -32,7 +32,7 @@ export class UserAuthService {
 
     if (res) {
       localStorage.setItem('token', res);
-      this.user = await this.getCurrentUser();
+      await this.updateUser();
     }
     return Boolean(res);
   }
@@ -40,6 +40,10 @@ export class UserAuthService {
   logout() {
     localStorage.removeItem('token');
     this.user = null;
+  }
+
+  async updateUser() {
+    this.user = await this.getCurrentUser();
   }
 
   async getUser(id: string) {
@@ -59,6 +63,8 @@ export interface User {
   username: string;
   avatarURL: string;
   bio: string;
+  following: string[];
+  followers: string[];
   tags: string[];
   createdAt: Date;
 }

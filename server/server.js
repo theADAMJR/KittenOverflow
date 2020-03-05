@@ -36,6 +36,7 @@ app.use(express.static(process.env.DIST || '/app/dist/KittenBlogs'));
 app.all('*', (req, res) =>
     res.status(200).sendFile(process.env.DIST + '/index.html' || '/app/dist/KittenBlogs/index.html'));
 
-app.listen(process.env.PORT || 8080, () => console.log('API server is live!'));
+const port = process.env.PORT || 8080;
+app.listen(port, () => console.log(`API server is live on port ${port}!`));
 
 module.exports = app;

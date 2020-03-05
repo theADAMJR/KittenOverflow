@@ -1,11 +1,18 @@
 <section class="container">
     <div class="jumbotron">
-        <h1 class="display-3">{{ user.username }}</h1>
-        <p class="lead">{{ user.bio }}</p>
-        <hr class="my-2">
-        <p>{{ user.tags }}</p>
-        <p class="lead">
-            <a class="btn btn-primary" routerLink="follow" role="button">Follow</a>
-        </p>
+        <h1 class="display-3">{{ profileUser.username }}</h1>
+        <p class="lead">{{ profileUser.bio }}</p>
+        <hr class="mt-2">
+        <p>{{ profileUser.tags }}</p>
+        <span class="text-muted">
+            {{ profileUser.followers?.length | number }} followers | {{ profileUser.following?.length | number }} following
+        </span>
+        <hr>
+        <div>
+            <a [hidden]="isSelf" (click)="!isFollowing ? follow() : unfollow()" [textContent]="isFollowing ? 'Unfollow' : 'Follow'"
+                class="btn btn-primary" role="button"></a>
+            <a *ngIf="isSelf"
+                class="btn btn-warning float-right" routerLink="edit" role="button">Edit</a>
+        </div>
     </div>
 </section>

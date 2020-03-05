@@ -17,6 +17,7 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     RecentPostsComponent,
     LoginComponent,
     SignUpComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

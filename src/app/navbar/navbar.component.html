@@ -2,34 +2,38 @@
     <a class="navbar-brand" routerLink="/">
         <i class="fas fa-cat"></i> Kitten<strong>Overflow</strong>
     </a>
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
-            <a class="nav-link" routerLink="/posts">Posts</a>
-        </li>
-        <li class="nav-item active">
-            <a class="nav-link" routerLink="/tags">Tags</a>
-        </li>
-        <li class="nav-item active">
-            <a class="nav-link" routerLink="/users">Users</a>
-        </li>
-    </ul>
-    <ul class="navbar-nav ml-auto">
-        <li *ngIf="!user"
-            class="nav-item">
-            <a class="nav-link" routerLink="/sign-up">Sign Up</a>
-        </li>
-        <li *ngIf="!user"
-            class="nav-item">
-            <a class="nav-link" routerLink="/login">Login</a>
-        </li>
-        <li *ngIf="user" 
-            class="nav-item">
-            <a (click)="auth.logout()"
-                class="nav-link" routerLink="">Logout</a>
-        </li>
-        <li *ngIf="user" 
-            class="nav-item">
-            <a class="nav-link" [routerLink]="['/users/' + user._id]">{{ user.username }}</a>
-        </li>
-    </ul>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation"></button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/posts">Posts</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/tags">Tags</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/users">Users</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li *ngIf="!user"
+                class="nav-item">
+                <a class="nav-link" routerLink="/sign-up">Sign Up</a>
+            </li>
+            <li *ngIf="!user"
+                class="nav-item">
+                <a class="nav-link" routerLink="/login">Login</a>
+            </li>
+            <li *ngIf="user" 
+                class="nav-item">
+                <a (click)="auth.logout()"
+                    class="nav-link" routerLink="">Logout</a>
+            </li>
+            <li *ngIf="user" 
+                class="nav-item">
+                <a class="nav-link" [routerLink]="['/users/' + user._id]">{{ user.username }}</a>
+            </li>
+        </ul>
+    </div>
 </nav>

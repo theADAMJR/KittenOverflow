@@ -10,6 +10,8 @@ const setup = (username) => (
     username: username,
     bio: "No bio set.",
     avatarUrl: "",
+    following: [],
+    followers: [],
     tags: [],
     createdAt: new Date() 
 });
