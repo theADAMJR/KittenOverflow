@@ -3,6 +3,7 @@ import { ProfileService } from '../profile.service';
 import { UserAuthService, User } from '../services/user-auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../users.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'profile',
@@ -33,6 +34,8 @@ export class ProfileComponent implements OnInit {
     this.isFollowing = this.auth.user.following
       .some(id => id === this.profileId);
   }
+
+  avatarUrl = () => `http://localhost:${environment.port}/api/users/${this.profileId}/avatar`;
 
   async follow() {
     this.isFollowing = true;

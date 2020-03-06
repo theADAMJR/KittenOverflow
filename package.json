@@ -28,6 +28,7 @@
     "bootstrap": "^4.4.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-fileupload": "^1.1.6",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.2",
     "passport": "^0.4.1",
@@ -42,9 +43,10 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.3",
     "@angular/language-service": "~9.0.2",
-    "@types/node": "^12.11.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
+    "chai": "^4.2.0",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -54,6 +56,7 @@
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
     "protractor": "~5.4.3",
+    "supertest": "^4.0.2",
     "tslint": "~5.18.0"
   },
   "engines": {
