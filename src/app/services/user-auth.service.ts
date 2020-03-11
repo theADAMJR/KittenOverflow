@@ -61,7 +61,6 @@ export class UserAuthService {
 export interface User {
   _id: string;
   username: string;
-  avatarURL: string;
   bio: string;
   following: string[];
   followers: string[];

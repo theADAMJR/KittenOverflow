@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsernameValidators } from './username.validators';
 import { UserAuthService, Credentials, User } from '../services/user-auth.service';
 import { Router } from '@angular/router';
-import { UsersService } from '../users.service';
+import { UsersService } from '../services/users.service';
 import { PasswordValidators } from './password.validators';
 
 @Component({

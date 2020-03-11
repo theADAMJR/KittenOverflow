@@ -1,4 +1,5 @@
-const bodyParser = require('body-parser'),
+const api = require('./api');
+      bodyParser = require('body-parser'),
       cors = require('cors'),
       express = require('express'),
       LocalStrategy = require('passport-local'),
@@ -6,10 +7,6 @@ const bodyParser = require('body-parser'),
       passport = require('passport'),
       path = require('path'),
       User = require('./models/user');
-
-const authRoutes = require('./routes/auth'),
-      postsRoutes = require('./routes/posts'),
-      usersRoutes = require('./routes/users');
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/KittenOverflow', 
     { useNewUrlParser: true, useUnifiedTopology: true });
@@ -24,12 +21,7 @@ app.use(cors())
 app.use(passport.initialize());
 app.use(bodyParser.json());
 
-app.use('/api', authRoutes);
-app.use('/api/posts', postsRoutes);
-app.use('/api/users', usersRoutes);
-
-app.get('/api', (req, res) => res.json({ hello: 'world' }));
-app.all('/api/*', (req, res) => res.status(404).send('Not Found'));
+app.use('/api', api);
 
 app.use(express.static(process.env.DIST || '/app/dist/KittenBlogs'));
 

@@ -1,18 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsernameValidators } from '../sign-up/username.validators';
-import { UsersService } from '../users.service';
 import { User, UserAuthService } from '../services/user-auth.service';
-import { ActivatedRoute } from '@angular/router';
 import { PasswordValidators } from '../sign-up/password.validators';
+import { Tag } from '../tags/tags.component';
+import { TagsService } from '../services/tags.service';
+import UsernameGenerator from 'username-generator';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.css']
 })
-export class EditProfileComponent {// TODO: add route auth guard
-  selectedAvatar = null;
+export class EditProfileComponent implements OnInit {// TODO: add route auth guard
+  selectedAvatar: File;
+  allTags: Tag[];
 
   form = new FormGroup({
     general: new FormGroup({
@@ -39,29 +42,49 @@ export class EditProfileComponent {// TODO: add route auth guard
   });
 
   get general() { return this.form.get('general'); }
+  get security() { return this.form.get('security'); }
+
   get username() { return this.general.get('username'); }
   get bio() { return this.general.get('bio'); }
   get avatar() { return this.general.get('avatar'); }
   get tags() { return this.general.get('tags'); }
 
-  get security() { return this.form.get('security'); }
-  get password() { return this.general.get('password'); }
-  get confirmPassword() { return this.general.get('confirmPassword'); }
+  get password() { return this.security.get('password'); }
+  get confirmPassword() { return this.security.get('confirmPassword'); }
 
   get profile() { return this.auth.user || {} as User; }
 
   constructor(
     private service: UsersService,
     private auth: UserAuthService,
-    private route: ActivatedRoute) {}
+    private tagsService: TagsService) {}
 
-  onFileSelected(event) {
+  async ngOnInit() {
+    this.allTags = await this.tagsService.get() as Tag[];
+  }
+
+  generateUsername() {
+    this.username.setValue(UsernameGenerator.generateUsername('-'));
+  }
+
+  onFileSelected(event: any) {
     this.selectedAvatar = event.target.files[0];
   }
 
-  async onSubmit() {
-    const data = new FormData();
-    data.append('avatar', this.selectedAvatar, this.selectedAvatar.name);
-    await this.service.update(this.profile._id, this.profile);
+  async onSubmit(form: any) {
+    // if (this.form.invalid) {
+    //   return;
+    // }
+    // await this.service.update(this.profile._id, this.toUser());
+    await this.service.uploadAvatar(this.selectedAvatar);
+  }
+
+  private toUser() {
+    const user = this.profile;
+    user.username = this.username.value;
+    user.bio = this.bio.value;
+    user.tags = this.tags.value;
+    user['password'] = this.password.value;
+    return user;
   }
 }

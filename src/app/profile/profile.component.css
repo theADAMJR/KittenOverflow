@@ -1,0 +1,6 @@
+img {
+    max-width: 128px; 
+    float: left;
+    margin-right: 15px;
+    border-radius: 5px;
+}

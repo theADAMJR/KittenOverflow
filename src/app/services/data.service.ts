@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 export abstract class DataService {
     constructor(private url: string, protected http: HttpClient) {}
@@ -21,7 +21,7 @@ export abstract class DataService {
 
     update(id: string, newItem: any, options: any): Promise<any> | null {
         return new Promise((resolve, reject) => {
-            this.http.patch(`${this.url}/${id}`, newItem, options)
+            this.http.put(`${this.url}/${id}`, newItem, options)
                 .subscribe(res => resolve(res),
                 err => reject(err));
         });

@@ -4,8 +4,8 @@
     <div *ngFor="let user of users" 
         class="col-lg-3 col-md-4 col-sm-6 float-left">
         <div class="media">
-            <a class="d-flex align-self-bottom" href="#">
-                <img src="//cdn.pixabay.com/photo/2018/11/13/21/43/instagram-3814049_960_720.png">
+            <a class="d-flex align-self-bottom" [routerLink]="['/users/' + user._id]">
+                <img [src]="service.avatarURL(user._id)">
             </a>
             <div class="media-body">
                 <h5><a [routerLink]="['/users/' + user._id]">{{ user.username }}</a></h5>

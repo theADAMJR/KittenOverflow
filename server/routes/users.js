@@ -1,5 +1,6 @@
 const express = require('express'),
       fileUpload = require('express-fileupload'),
+      { existsSync } = require('fs'),
       jwt = require('jsonwebtoken'),
       middleware = require('../middleware'),
       path = require('path'),
@@ -21,9 +22,19 @@ router.get('/:id', async(req, res) => {
     } catch (err) { res.status(400).send(err) }
 });
 
-router.patch('/:id', middleware.validateOwner, async(req, res) => {
+router.put('/:id', middleware.validateOwner, async(req, res) => {
     try {
-        await User.updateOne(req.params.id, req.body);
+        console.log('body: ');
+        console.log(req.body);
+        const user = await User.findById(req.params.id);
+
+        await user.setPassword(req.body.password);
+        delete req.body.password;
+        user.save();
+        
+        const updatedUser = { ...req.body, user };
+        await User.updateOne({ _id: req.params.id }, updatedUser);
+
         res.status(202).send('Success!');
     } catch (err) { res.status(400).send(err) }
 });
@@ -70,7 +81,9 @@ router.get('/:id/unfollow', middleware.validateUser, async(req, res) => {
         
         res.status(203).send('Success!');
     }
-    catch { return res.status(400).send('Bad Request'); }
+    catch { 
+        return res.status(400).send('Bad Request'); 
+    }
 });
 
 function canUnfollow(followee, follower) { 
@@ -79,10 +92,12 @@ function canUnfollow(followee, follower) {
 
 router.post('/upload-avatar', middleware.validateUser, (req, res) => {
     try {
+        console.log(req.files);
         if(!req.files)
             return res.status(400).send('No file uploaded');
 
         const avatar = req.files.avatar;
+        
         avatar.mv(`./uploads/${res.locals.user._id}.png`);
 
         res.status(201).send(`Success!`);
@@ -96,8 +111,11 @@ router.get('/:id/avatar', (req, res) => {
     try {
         res.setHeader('content-type', 'image/png')
         
-        const root = path.resolve('./');
-        res.sendFile(root + `/uploads/${req.params.id}.png`);
+        const root = path.resolve('./');        
+        const imagePath = `${root}/uploads/${req.params.id}.png`;
+        const image = (existsSync(imagePath)) ? imagePath : `${root}/uploads/default.png`;
+
+        res.sendFile(image);
     } catch (err) {
         res.status(500).send(err);
         console.error(err);

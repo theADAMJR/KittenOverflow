@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TagsService } from '../services/tags.service';
 
 @Component({
   selector: 'app-tags',
@@ -6,17 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tags.component.css']
 })
 export class TagsComponent implements OnInit {
+  tags: Tag[];
 
-  tags = [
-    { name: 'c#', description: 'A good language. Used by the finest kittens.' },
-    { name: 'ts', description: 'Another good language. Used by fine kittens.' },
-    { name: 'angular', description: 'A great framework. Used by this lol' },
-    { name: 'js', description: 'Use TypeScript instead for webapps.' }
-  ];
+  constructor(private service: TagsService) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.tags = await this.service.get() as Tag[];
   }
+}
 
+export interface Tag {
+  name: string;
+  description: string;
 }

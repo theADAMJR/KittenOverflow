@@ -9,10 +9,7 @@ export class UsernameValidators {
         return new Promise(resolve => {
             setTimeout(() => {
                 const isTaken = UsernameValidators.takenUsernames.some(u => u.toLowerCase() === control.value.toLowerCase());
-                const validation = isTaken ? { shouldBeUnique: true } : null;
-                console.log(validation);
-
-                resolve(validation);
+                resolve(isTaken ? { shouldBeUnique: true } : null);
             }, 500);
         });
     }
