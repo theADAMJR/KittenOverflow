@@ -72,6 +72,7 @@ export class EditProfileComponent implements OnInit {// TODO: add route auth gua
   }
 
   async onSubmit(form: any) {
+    return;
     // if (this.form.invalid) {
     //   return;
     // }
@@ -84,7 +85,7 @@ export class EditProfileComponent implements OnInit {// TODO: add route auth gua
     user.username = this.username.value;
     user.bio = this.bio.value;
     user.tags = this.tags.value;
-    user.password = this.password.value;
+    user['password'] = this.password.value;
     return user;
   }
 }
