@@ -8,6 +8,6 @@ import { DataService } from './data.service';
 })
 export class PostsService extends DataService {
   constructor(http: HttpClient) {
-    super(`http://localhost:${environment.port}/api/posts`, http);
+    super(`${environment.api}/posts`, http);
   }
 }

@@ -8,6 +8,6 @@ import { DataService } from './data.service';
 })
 export class TagsService extends DataService {
   constructor(http: HttpClient) {
-    super(`http://localhost:${environment.port}/api/tags`, http);
+    super(`${environment.api}/tags`, http);
   }
 }

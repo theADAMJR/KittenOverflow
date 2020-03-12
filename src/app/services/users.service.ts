@@ -13,7 +13,7 @@ export class UsersService extends DataService {
   }
 
   private static getRoute(route = '') {
-    return `http://localhost:${environment.port}/api/users/${route}`;
+    return `${environment.api}/users/${route}`;
   }
 
   update(id: string, newItem: any, extraOptions?: any) {
@@ -29,7 +29,7 @@ export class UsersService extends DataService {
   }
 
   avatarURL(id: string) {
-    return `http://localhost:${environment.port}/api/users/${id}/avatar`;
+    return `${environment.api}/users/${id}/avatar`;
   }
 
   uploadAvatar(avatar: File) {
