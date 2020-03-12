@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserAuthService, User } from './services/user-auth.service';
+import { User, UserAuthService } from './services/user-auth.service';
 
 export class ProfileService implements OnInit {
   user: User;

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UsernameValidators } from '../sign-up/username.validators';
-import { User, UserAuthService } from '../services/user-auth.service';
-import { PasswordValidators } from '../sign-up/password.validators';
-import { Tag } from '../tags/tags.component';
-import { TagsService } from '../services/tags.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import UsernameGenerator from 'username-generator';
+import { TagsService } from '../services/tags.service';
+import { User, UserAuthService } from '../services/user-auth.service';
 import { UsersService } from '../services/users.service';
+import { PasswordValidators } from '../sign-up/password.validators';
+import { UsernameValidators } from '../sign-up/username.validators';
+import { Tag } from '../tags/tags.component';
 
 @Component({
   selector: 'app-edit-profile',
@@ -84,7 +84,7 @@ export class EditProfileComponent implements OnInit {// TODO: add route auth gua
     user.username = this.username.value;
     user.bio = this.bio.value;
     user.tags = this.tags.value;
-    user['password'] = this.password.value;
+    user.password = this.password.value;
     return user;
   }
 }

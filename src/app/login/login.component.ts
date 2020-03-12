@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Validators, FormControl, FormGroup } from '@angular/forms';
-import { UserAuthService, Credentials } from '../services/user-auth.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Credentials, UserAuthService } from '../services/user-auth.service';
 
 @Component({
   selector: 'login',

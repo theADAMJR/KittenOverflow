@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UsernameValidators } from './username.validators';
-import { UserAuthService, Credentials, User } from '../services/user-auth.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Credentials, User, UserAuthService } from '../services/user-auth.service';
 import { UsersService } from '../services/users.service';
 import { PasswordValidators } from './password.validators';
+import { UsernameValidators } from './username.validators';
 
 @Component({
   selector: 'sign-up',

@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { DataService } from './data.service';
+import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { DataService } from './data.service';
 import { UserAuthService } from './user-auth.service';
 
 @Injectable({
