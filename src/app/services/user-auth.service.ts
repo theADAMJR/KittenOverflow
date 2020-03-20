@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class UserAuthService {
   user: User;
-  endpoint = `${environment.api}`;
+  endpoint = environment.api;
 
   get loggedIn() { return new JwtHelperService().isTokenExpired(this.token); }
   get token() { return localStorage.getItem('token'); }
